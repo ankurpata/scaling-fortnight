@@ -1,0 +1,4 @@
+extend type SomeType {
+  "Custom data for some purpose documented here"
+  myf: String
+}

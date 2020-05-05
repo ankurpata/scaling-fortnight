@@ -3,8 +3,3 @@ extend type Product {
   myf: String
 }
 
-extend type ProductInput {
-  "Custom data for some purpose documented here"
-  myf: String
-}
-

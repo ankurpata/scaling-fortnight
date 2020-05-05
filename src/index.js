@@ -1,5 +1,5 @@
 import pkg from "../package.json";
-import schemas from "./schemas";
+import schemas from "./schemas/index.js";
 
 import preStartup from "./preStartup.js";
 

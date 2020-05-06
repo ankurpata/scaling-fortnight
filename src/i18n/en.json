@@ -13,7 +13,6 @@
           },
           "productDetailEdit": {
             "productType": "Product Type",
-            "productWebsites": "Product Websites",
             "styliParams": "Styli Custom Parameters"
           },
           "productVariant": {
@@ -30,7 +29,9 @@
             "titlePlaceholder": "Example: Fancy T-Shirt - Red - Large"
           },
           "helpText": {
+            "productWebsites": "Product Websites",
             "attributeSetCode": "Attribute Set codes",
+            "storeViewCode": "Store View Code",
             "sku": "Unique SKU for the product"
           },
           "settings": {

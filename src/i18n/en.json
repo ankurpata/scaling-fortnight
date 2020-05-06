@@ -20,7 +20,7 @@
             "optionTitlePlaceholder": "Examples: Red, Large",
             "titlePlaceholder": "Example: Fancy T-Shirt - Red - Large"
           },
-          "helptext": {
+          "helpText": {
             "sku": "Unique SKU for the product"
           },
           "settings": {

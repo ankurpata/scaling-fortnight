@@ -18,12 +18,23 @@ export default async function register(app) {
             preStartup: [preStartup],
             publishProductToCatalog: [publishProductToCatalog]
         },
-        graphQL: {
-            schemas
-        },
-        catalog: {
-            customPublishedProductFields: ["myf"],
-            customPublishedProductVariantFields: ["myf"]
-        },
     });
 }
+// export default async function register(app) {
+//     await app.registerPlugin({
+//         label: "Plugin Example",
+//         name: "plugin-example",
+//         version: pkg.version,
+//         functionsByType: {
+//             preStartup: [preStartup],
+//             publishProductToCatalog: [publishProductToCatalog]
+//         },
+//         graphQL: {
+//             schemas
+//         },
+//         catalog: {
+//             customPublishedProductFields: ["myf"],
+//             customPublishedProductVariantFields: ["myf"]
+//         },
+//     });
+// }

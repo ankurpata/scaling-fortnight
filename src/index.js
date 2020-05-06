@@ -1,5 +1,6 @@
 import pkg from "../package.json";
 import schemas from "./schemas/index.js";
+import i18n from "./i18n/index.js";
 
 import preStartup from "./preStartup.js";
 import publishProductToCatalog from "./publishProductToCatalog.js";
@@ -14,10 +15,7 @@ export default async function register(app) {
         label: "Plugin Example",
         name: "plugin-example",
         version: pkg.version,
-        functionsByType: {
-            preStartup: [preStartup],
-            publishProductToCatalog: [publishProductToCatalog]
-        },
+        i18n,
     });
 }
 // export default async function register(app) {

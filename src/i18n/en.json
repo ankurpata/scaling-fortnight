@@ -12,10 +12,11 @@
             "manageGroups": "Manage Groups"
           },
           "productDetailEdit": {
-            "productType": "Product Type"
+            "productType": "Product Type",
+            "productWebsites": "Product Websites",
+            "styliParams": "Styli Custom Parameters",
           },
           "productVariant": {
-            "styliParams": "Custom Values for Styli",
             "storeViewCode": "Store View Code",
             "sku": "SKU",
             "attributeSetCode": "Attribute Set Code (Eg. Topwear - Women - Top)",
@@ -29,9 +30,7 @@
             "titlePlaceholder": "Example: Fancy T-Shirt - Red - Large"
           },
           "helpText": {
-            "productWebsites": "Product Websites",
             "attributeSetCode": "Attribute Set codes",
-            "storeViewCode": "Store View Code",
             "sku": "Unique SKU for the product"
           },
           "settings": {

@@ -13,6 +13,7 @@
           },
           "productVariant": {
             "sku": "SKU",
+            "skuPlaceholder": "AE322433",
             "attributeLabelLabel": "Attribute label",
             "attributeLabelPlaceholder": "Examples: Color, Size",
             "inventoryAvailableToSell": "Available to sell",

@@ -2,6 +2,7 @@ import pkg from "../package.json";
 import schemas from "./schemas/index.js";
 
 import preStartup from "./preStartup.js";
+import publishProductToCatalog from "./publishProductToCatalog.js";
 
 /**
  * @summary Import and call this function to add this plugin to your API.
@@ -14,10 +15,15 @@ export default async function register(app) {
         name: "plugin-example",
         version: pkg.version,
         functionsByType: {
-            preStartup: [preStartup]
+            preStartup: [preStartup],
+            publishProductToCatalog: [publishProductToCatalog]
         },
         graphQL: {
             schemas
+        },
+        catalog: {
+            customPublishedProductFields: ["myf"],
+            customPublishedProductVariantFields: ["myf"]
         },
     });
 }

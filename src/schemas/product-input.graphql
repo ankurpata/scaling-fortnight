@@ -1,7 +1,0 @@
-extend type ProductInput {
-  "Custom data for some purpose documented here"
-  myf: String
-}
-
-
-

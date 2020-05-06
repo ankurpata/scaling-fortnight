@@ -10,6 +10,12 @@ export default async function preStartup(context) {
             optional: true
         }
     });
+  context.simpleSchemas.ProductInput.extend({
+        myf: {
+            type: String,
+            optional: true
+        }
+    });
 
 
 }

@@ -11,9 +11,16 @@
             "accountsDescription": "Account Settings",
             "manageGroups": "Manage Groups"
           },
+          "productDetailEdit": {
+            "productType": "Product Type"
+          },
           "productVariant": {
+            "styliParams": "Custom Values for Styli",
+            "storeViewCode": "Store View Code",
             "sku": "SKU",
+            "attributeSetCode": "Attribute Set Code (Eg. Topwear - Women - Top)",
             "skuPlaceholder": "AE322433",
+            "styliParams": "Styli Custom Parameters",
             "attributeLabelLabel": "Attribute label",
             "attributeLabelPlaceholder": "Examples: Color, Size",
             "inventoryAvailableToSell": "Available to sell",
@@ -22,6 +29,9 @@
             "titlePlaceholder": "Example: Fancy T-Shirt - Red - Large"
           },
           "helpText": {
+            "productWebsites": "Product Websites",
+            "attributeSetCode": "Attribute Set codes",
+            "storeViewCode": "Store View Code",
             "sku": "Unique SKU for the product"
           },
           "settings": {

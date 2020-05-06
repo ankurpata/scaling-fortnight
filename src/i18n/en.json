@@ -14,7 +14,7 @@
           "productDetailEdit": {
             "productType": "Product Type",
             "productWebsites": "Product Websites",
-            "styliParams": "Styli Custom Parameters",
+            "styliParams": "Styli Custom Parameters"
           },
           "productVariant": {
             "storeViewCode": "Store View Code",

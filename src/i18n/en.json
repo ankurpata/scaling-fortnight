@@ -12,6 +12,11 @@
             "manageGroups": "Manage Groups"
           },
           "productDetailEdit": {
+            "createdAt": "Created At",
+            "updatedAt": "Updated At",
+            "taxClassName" : "Tax Class Name",
+            "title": "Product Name",
+            "visibility" : "Visibility",
             "productType": "Product Type",
             "styliParams": "Styli Custom Parameters"
           },
@@ -29,6 +34,10 @@
             "titlePlaceholder": "Example: Fancy T-Shirt - Red - Large"
           },
           "helpText": {
+            "createdAt": "Created date timestamp of the product ",
+            "updatedAt": "Updated date timestamp of the product ",
+            "taxClassName" : "Tax Class Name",
+            "visibility" : "Eg. Catalog, Search)",
             "productWebsites": "Product Websites",
             "attributeSetCode": "Attribute Set codes",
             "storeViewCode": "Store View Code",

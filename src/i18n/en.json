@@ -37,7 +37,7 @@
             "createdAt": "Created date timestamp of the product ",
             "updatedAt": "Updated date timestamp of the product ",
             "taxClassName" : "Tax Class Name",
-            "visibility" : "Eg. Catalog, Search)",
+            "visibility" : "Eg. Catalog, Search",
             "productWebsites": "Product Websites",
             "attributeSetCode": "Attribute Set codes",
             "storeViewCode": "Store View Code",

@@ -1,7 +1,7 @@
 import pkg from "../package.json";
 import schemas from "./schemas/index.js";
 import i18n from "./i18n/index.js";
-import resolvers from "./resolvers";
+import resolvers from "./resolvers/index.js";
 
 import preStartup from "./preStartup.js";
 import publishProductToCatalog from "./publishProductToCatalog.js";

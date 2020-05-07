@@ -1,4 +1,4 @@
-import ProductInput from "./ProductInput"
+import ProductInput from "./ProductInput";
 
 export default {
     ProductInput

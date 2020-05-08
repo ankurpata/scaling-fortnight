@@ -5,6 +5,7 @@
     "translation": {
       "reaction-accounts": {
         "admin": {
+          "imports": "Imports",
           "dashboard": {
             "accountsLabel": "Accounts",
             "accountsTitle": "Accounts",
@@ -12,12 +13,13 @@
             "manageGroups": "Manage Groups"
           },
           "productDetailEdit": {
+            "importButton": "Import Button",
             "myf": "My Custom Field in Product Schema",
             "createdAt": "Created At",
             "updatedAt": "Updated At",
-            "taxClassName" : "Tax Class Name",
+            "taxClassName": "Tax Class Name",
             "title": "Product Name",
-            "visibility" : "Visibility",
+            "visibility": "Visibility",
             "productType": "Product Type",
             "styliParams": "Styli Custom Parameters"
           },
@@ -37,8 +39,8 @@
           "helpText": {
             "createdAt": "Created date timestamp of the product ",
             "updatedAt": "Updated date timestamp of the product ",
-            "taxClassName" : "Tax Class Name",
-            "visibility" : "Eg. Catalog, Search",
+            "taxClassName": "Tax Class Name",
+            "visibility": "Eg. Catalog, Search",
             "productWebsites": "Product Websites",
             "attributeSetCode": "Attribute Set codes",
             "storeViewCode": "Store View Code",

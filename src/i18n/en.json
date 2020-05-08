@@ -12,6 +12,7 @@
             "manageGroups": "Manage Groups"
           },
           "productDetailEdit": {
+            "myf": "My Custom Field in Product Schema",
             "createdAt": "Created At",
             "updatedAt": "Updated At",
             "taxClassName" : "Tax Class Name",

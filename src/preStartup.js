@@ -17,10 +17,6 @@ export default async function preStartup(context) {
             type: String,
             optional: true
         },
-        productType: {
-            type: String,
-            optional: true
-        },
         productWebsites: {
             type: String,
             optional: true

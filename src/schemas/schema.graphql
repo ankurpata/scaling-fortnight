@@ -8,9 +8,6 @@ extend type Product {
   "Attribute View Code"
   attributeSetCode: String
 
-  "Product Type Simple or Configurable"
-  productType: String
-
   "Product Websites"
   productWebsites: String
 
@@ -212,9 +209,6 @@ extend type CatalogItemProduct {
   "Attribute View Code"
   attributeSetCode: String
 
-  "Product Type Simple or Configurable"
-  productType: String
-
   "Product Websites"
   productWebsites: String
 
@@ -414,9 +408,6 @@ extend input ProductInput {
 
   "Attribute View Code"
   attributeSetCode: String
-
-  "Product Type Simple or Configurable"
-  productType: String
 
   "Product Websites"
   productWebsites: String

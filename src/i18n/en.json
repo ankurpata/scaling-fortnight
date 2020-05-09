@@ -12,6 +12,10 @@
             "accountsDescription": "Account Settings",
             "manageGroups": "Manage Groups"
           },
+          "importCard" : {
+            "importProducts": "Import Products",
+            "titleProduct" : "Import products by file"
+          },
           "productDetailEdit": {
             "importButton": "Import Button",
             "myf": "My Custom Field in Product Schema",

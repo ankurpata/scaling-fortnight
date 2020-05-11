@@ -4,7 +4,7 @@ import i18n from "./i18n/index.js";
 // import resolvers from "./resolvers/index.js";
 
 import preStartup from "./preStartup.js";
-import kafkaSubscriber from "./kafkaSubscriber.js";
+// import kafkaSubscriber from "./kafkaSubscriber.js";
 // import publishProductToCatalog from "./publishProductToCatalog.js";
 
 /**
@@ -27,7 +27,6 @@ export default async function register(app) {
         version: pkg.version,
         functionsByType: {
             preStartup: [preStartup],
-            startup: [kafkaSubscriber]
         },
         graphQL: {
             schemas,

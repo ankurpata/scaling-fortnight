@@ -2,6 +2,9 @@
 //
 // const require = createRequire(import.meta.url); // eslint-disable-line
 // const { kafka } = require("kafka-node");
+// eslint-disable-next-line node/no-extraneous-import
+import Logger from "@reactioncommerce/logger";
+
 import kafkaApi from "kafka-node";
 
 const { KafkaClient, Consumer } = kafkaApi;

@@ -5,7 +5,7 @@ import i18n from "./i18n/index.js";
 
 import preStartup from "./preStartup.js";
 import kafkaSubscriber from "./kafkaSubscriber.js";
-import publishProductToCatalog from "./publishProductToCatalog.js";
+// import publishProductToCatalog from "./publishProductToCatalog.js";
 
 /**
  * @summary Import and call this function to add this plugin to your API.

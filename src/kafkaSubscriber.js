@@ -1,8 +1,8 @@
-// eslint-disable-next-line no-undef
 import { createRequire } from "module";
 
 const require = createRequire(import.meta.url); // eslint-disable-line
-const kafka = require("kafka-node");
+const { kafka } = require("kafka-node");
+
 /**
  * @summary Called on startup
  * @param {Object} context Startup context

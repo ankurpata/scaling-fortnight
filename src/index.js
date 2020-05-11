@@ -26,7 +26,8 @@ export default async function register(app) {
         name: "plugin-example",
         version: pkg.version,
         functionsByType: {
-            preStartup: [preStartup, kafkaSubscriber]
+            preStartup: [preStartup],
+            startup: [kafkaSubscriber]
         },
         graphQL: {
             schemas,

@@ -30,7 +30,7 @@ export default async function kafkaSubscriber() {
                 fromOffset: false
             }
         );
-        consumer.on("message", async function (message) {
+        consumer.on("message", async (message) => {
             const consumerdata = JSON.parse(message.value);
             console.log(message, "~~~~~Message Received@kafkaConsumerReactionCommerce~~~~~~");
             Logger.info(message);

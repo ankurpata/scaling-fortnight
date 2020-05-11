@@ -3,7 +3,7 @@
 // const require = createRequire(import.meta.url); // eslint-disable-line
 // const { kafka } = require("kafka-node");
 
-import { KafkaClient, Consumer, Message, Offset, OffsetFetchRequest, ConsumerOptions } from "kafka-node";
+import { KafkaClient, Consumer } from "kafka-node";
 
 
 /**

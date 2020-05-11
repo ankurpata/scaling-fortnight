@@ -1,7 +1,11 @@
-import { createRequire } from "module";
+// import { createRequire } from "module";
+//
+// const require = createRequire(import.meta.url); // eslint-disable-line
+// const { kafka } = require("kafka-node");
 
-const require = createRequire(import.meta.url); // eslint-disable-line
-const { kafka } = require("kafka-node");
+import setContex from "kafka-node";
+
+const { kafka } = setContex;
 
 /**
  * @summary Called on startup

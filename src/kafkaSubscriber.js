@@ -5,10 +5,11 @@
 // eslint-disable-next-line node/no-extraneous-import
 import Logger from "@reactioncommerce/logger";
 
-import { createRequire } from "module";
+// import { createRequire } from "module";
 
-const require = createRequire(import.meta.url); // eslint-disable-line
-const { KafkaConsumer } = require("node-rdkafka");
+import kafkaApi from "node-rdkafka";
+
+const { KafkaConsumer } = kafkaApi;
 // import Kafka from "node-rdkafka"; // see: https://github.com/blizzard/node-rdkafka
 
 const CONSUMER_GROUP_ID = "node-consumer-2";
@@ -38,7 +39,7 @@ export default async function kafkaSubscriber() {
         const topics = ["bddcy39c-default"];
 
 
-        var stream = new Kafka.KafkaConsumer.createReadStream(kafkaConf, {"auto.offset.reset": "earliest"}, {
+        var stream = new KafkaConsumer.createReadStream(kafkaConf, {"auto.offset.reset": "earliest"}, {
             topics: topics
         });
 

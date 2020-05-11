@@ -18,7 +18,7 @@ const { KafkaClient, Consumer } = kafkaApi;
 export default async function kafkaSubscriber() {
     try {
         console.log("kafka consumer is booting up")
-        const client = new KafkaClient("localhost:2181");
+        const client = new KafkaClient("http://[::1]:2181");
         const consumer = new Consumer(
             client,
             [{topic: "feed-service", partition: 0}],

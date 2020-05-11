@@ -7,7 +7,7 @@ import Logger from "@reactioncommerce/logger";
 
 import kafkaApi from "kafka-node";
 
-const { KafkaClient, Consumer } = kafkaApi;
+const {KafkaClient, Consumer} = kafkaApi;
 
 
 /**
@@ -17,11 +17,21 @@ const { KafkaClient, Consumer } = kafkaApi;
  */
 export default async function kafkaSubscriber() {
     try {
-        console.log("kafka consumer is booting up")
-        const client = new KafkaClient("http://[::1]:2181");
+        console.log("kafka consumer is booting up");
+        Logger.info("!!! Connecting Kafka !!!");
+
+        const client = new KafkaClient({
+            "metadata.broker.list": "rocket-01.srvs.cloudkafka.com:9094,rocket-02.srvs.cloudkafka.com:9094,rocket-03.srvs.cloudkafka.com:9094",
+            "security.protocol": "SASL_SSL",
+            "sasl.mechanisms": "SCRAM-SHA-256",
+            "sasl.username": "bddcy39c",
+            "sasl.password": "e8hPouz3LL2rhp_vtQhp547rYsr9BbhQ",
+            "socket.keepalive.enable": true,
+            "debug": "generic,broker,security"
+        });
         const consumer = new Consumer(
             client,
-            [{topic: "feed-service", partition: 0}],
+            [{topic: "bddcy39c-default", partition: 1}],
             {
                 autoCommit: true,
                 fetchMaxWaitMs: 1000,

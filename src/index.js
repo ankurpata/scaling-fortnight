@@ -26,7 +26,7 @@ export default async function register(app) {
         name: "plugin-example",
         version: pkg.version,
         functionsByType: {
-            preStartup: [preStartup],
+            preStartup: [preStartup]
         },
         graphQL: {
             schemas,

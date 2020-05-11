@@ -28,7 +28,9 @@ export default async function kafkaSubscriber() {
         );
         consumer.on("message", async function (message) {
             const consumerdata = JSON.parse(message.value);
-
+            console.log(message, "~~~~~Message Received@kafkaConsumerReactionCommerce~~~~~~");
+            Logger.info(message);
+            Logger.info("~~~~~Message Received@kafkaConsumerReactionCommerce~~~~~~");
             console.log("===>", consumerdata);
 
             console.log(typeof (consumerdata.data));

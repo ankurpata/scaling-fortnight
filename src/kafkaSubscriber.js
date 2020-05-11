@@ -5,7 +5,11 @@
 // eslint-disable-next-line node/no-extraneous-import
 import Logger from "@reactioncommerce/logger";
 
-import Kafka from "node-rdkafka"; // see: https://github.com/blizzard/node-rdkafka
+import { createRequire } from "module";
+
+const require = createRequire(import.meta.url); // eslint-disable-line
+const { KafkaConsumer } = require("node-rdkafka");
+// import Kafka from "node-rdkafka"; // see: https://github.com/blizzard/node-rdkafka
 
 const CONSUMER_GROUP_ID = "node-consumer-2";
 

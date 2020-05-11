@@ -1,6 +1,8 @@
 // eslint-disable-next-line no-undef
-import kafka from "kafka-node";
+import { createRequire } from "module";
 
+const require = createRequire(import.meta.url); // eslint-disable-line
+const kafka = require("kafka-node");
 /**
  * @summary Called on startup
  * @param {Object} context Startup context
@@ -14,7 +16,6 @@ export default async function kafkaSubscriber() {
         let consumer = new Consumer(
             client,
             [{topic: 'feed-service', partition: 0}],
-
             {
                 autoCommit: true,
                 fetchMaxWaitMs: 1000,

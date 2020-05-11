@@ -2,8 +2,9 @@
 //
 // const require = createRequire(import.meta.url); // eslint-disable-line
 // const { kafka } = require("kafka-node");
+import kafkaApi from "kafka-node";
 
-import { KafkaClient, Consumer } from "kafka-node";
+const { KafkaClient, Consumer } = kafkaApi;
 
 
 /**

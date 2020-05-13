@@ -1,7 +1,9 @@
 import pkg from "../package.json";
 import schemas from "./schemas/index.js";
 import i18n from "./i18n/index.js";
-// import resolvers from "./resolvers/index.js";
+import mutations from "./mutations/index.js";
+
+import resolvers from "./resolvers/index.js";
 
 import preStartup from "./preStartup.js";
 // import kafkaSubscriber from "./kafkaSubscriber.js";
@@ -29,8 +31,10 @@ export default async function register(app) {
             preStartup: [preStartup]
         },
         graphQL: {
-            schemas,
+            resolvers,
+            schemas
         },
+        mutations,
         i18n
     });
 }

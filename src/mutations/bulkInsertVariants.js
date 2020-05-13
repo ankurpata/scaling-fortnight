@@ -12,8 +12,8 @@ const inputSchema = new SimpleSchema({
 });
 
 /**
- * @method updateProduct
- * @summary Updates a product
+ * @method bulkInsertVariants
+ * @summary Bulk inserts a product's variant
  * @param {Object} context -  an object containing the per-request state
  * @param {Object} input - Input arguments for the bulk operation
  * @param {String} input.field - product field to update
@@ -25,49 +25,98 @@ const inputSchema = new SimpleSchema({
 export default async function bulkInsertVariants(context, input) {
     inputSchema.validate(input);
     console.log('@bulkInsertVariants@api-plugin-scaling-fortnight');
-    const { appEvents, collections, simpleSchemas } = context;
-    const { Product } = simpleSchemas;
-    const { Products } = collections;
-    const { product: productInput, productId, shopId } = input;
+    const {appEvents, collections, simpleSchemas} = context;
+    const {Product} = simpleSchemas;
+    const {Products} = collections;
+    const { productId, shopId, variants: productVariantInput } = input;
 
     // Check that user has permission to create product
-    await context.validatePermissions("reaction:legacy:products", "create", { shopId });
+    await context.validatePermissions("reaction:legacy:products", "create", {shopId});
 
     // See that parent product exists
-    const parentProduct = await Products.findOne({ _id: productId, shopId });
+    const parentProduct = await Products.findOne({_id: productId, shopId});
     if (!parentProduct) {
         throw new ReactionError("not-found", "Product not found");
     }
 
-    const updateDocument = await cleanProductInput(context, {
-        currentProductHandle: currentProduct.handle,
-        productId,
-        productInput,
-        shopId
-    });
-
-    if (Object.keys(updateDocument).length === 0) {
-        throw new ReactionError("invalid-param", "At least one field to update must be provided");
+    let product;
+    let parentVariant;
+    if (parentProduct.type === "variant") {
+        product = await Products.findOne({_id: parentProduct.ancestors[0], shopId});
+        parentVariant = parentProduct;
+    } else {
+        product = parentProduct;
+        parentVariant = null;
     }
 
-    updateDocument.updatedAt = new Date();
+    // Verify that parent is not deleted
+    // Variants cannot be created on a deleted product
+    if (await isAncestorDeleted(context, product, true)) {
+        throw new ReactionError("server-error", "Unable to create product variant on a deleted product");
+    }
 
-    const modifier = { $set: updateDocument };
+    // get ancestors to build new ancestors array
+    let {ancestors} = parentProduct;
+    if (Array.isArray(ancestors)) {
+        ancestors.push(productId);
+    } else {
+        ancestors = [productId];
+    }
 
-    Product.validate(modifier, { modifier: true });
+    let newVariantArray = [];
+    for (const inputVariant of productVariantInput) {
+        const initialProductVariantData = await cleanProductVariantInput(context, {
+            inputVariant
+        });
 
-    const { value: updatedProduct } = await Products.findOneAndUpdate(
-        {
-            _id: productId,
-            shopId
-        },
-        modifier,
-        {
-            returnOriginal: false
+        // Generate a random ID, but only if one was not passed in
+        const newVariantId = (inputVariant && inputVariant._id) || Random.id();
+
+        const createdAt = new Date();
+        const newVariant = {
+            _id: newVariantId,
+            ancestors,
+            createdAt,
+            isDeleted: false,
+            isVisible: false,
+            shopId,
+            type: "variant",
+            updatedAt: createdAt,
+            workflow: {
+                status: "new"
+            },
+            ...initialProductVariantData
+        };
+
+        newVariantArray.push(newVariant);
+    }
+    //
+    // if (initialProductVariantData.isDeleted) {
+    //     throw new ReactionError("invalid-param", "Creating a deleted product variant is not allowed");
+    // }
+
+
+    const isOption = ancestors.length > 1;
+
+    // Apply custom transformations from plugins.
+    for (const customFunc of context.getFunctionsOfType("mutateNewVariantBeforeCreate")) {
+        // Functions of type "mutateNewVariantBeforeCreate" are expected to mutate the provided variant.
+        // We need to run each of these functions in a series, rather than in parallel, because
+        // we are mutating the same object on each pass.
+        // eslint-disable-next-line no-await-in-loop
+        for (const newVariant of newVariantArray) {
+            await customFunc(newVariant, {context, isOption, parentVariant, product});
         }
-    );
+    }
 
-    await appEvents.emit("afterProductUpdate", { productId, product: updatedProduct });
+    for (const newVariant of newVariantArray) {
+        ProductVariant.validate(newVariant);
+    }
+    //Bulk Insert
+    await Products.insertMany(newVariant);
 
-    return updatedProduct;
+
+    Logger.debug(`createProductVariant: created variant: ${newVariantId} for ${productId}`);
+    return newVariantArray;
+
 }

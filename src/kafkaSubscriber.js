@@ -7,7 +7,7 @@ import Logger from "@reactioncommerce/logger";
 
 // import { createRequire } from "module";
 
-import kafkaApi from "node-rdkafka/lib/index.js";
+import kafkaApi from "node-rdkafka/";
 
 const { KafkaConsumer } = kafkaApi;
 // import Kafka from "node-rdkafka"; // see: https://github.com/blizzard/node-rdkafka

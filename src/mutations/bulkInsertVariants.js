@@ -1,14 +1,20 @@
 import SimpleSchema from "simpl-schema";
 import ReactionError from "@reactioncommerce/reaction-error";
+import Random from "@reactioncommerce/random";
+import Logger from "@reactioncommerce/logger";
+import isAncestorDeleted from "../utils/isAncestorDeleted.js";
+import cleanProductVariantInput from "../utils/cleanProductVariantInput.js";
+// import { ProductVariant } from "../simpleSchemas.js";
 
 const inputSchema = new SimpleSchema({
-    variants: {
+    "variants": Array,
+    "variants.$": {
         type: Object,
         blackbox: true,
         optional: true
-    },
-    productId: String,
-    shopId: String
+     },
+    "productId": String,
+    "shopId": String
 });
 
 /**
@@ -23,8 +29,11 @@ const inputSchema = new SimpleSchema({
  * @return {Promise<Object>} updateProduct payload
  */
 export default async function bulkInsertVariants(context, input) {
+    console.log('@bulkInsertVariants@api-plugin-scaling-fortnight', input);
+
+    Logger.info(`bulkInsertVariants@api-plugin-scaling-fortnight:  ${ JSON.stringify(input) }`);
+
     inputSchema.validate(input);
-    console.log('@bulkInsertVariants@api-plugin-scaling-fortnight');
     const {appEvents, collections, simpleSchemas} = context;
     const {Product} = simpleSchemas;
     const {Products} = collections;
@@ -68,6 +77,11 @@ export default async function bulkInsertVariants(context, input) {
         const initialProductVariantData = await cleanProductVariantInput(context, {
             inputVariant
         });
+        Logger.info(`@1insideLoop:  ${ JSON.stringify(inputVariant) }`);
+
+        Logger.info(`@2insideLoop:  ${ JSON.stringify(initialProductVariantData) }`);
+        Logger.info(`@3insideLoop:  ${ JSON.stringify(cleanProductVariantInput) } : ${cleanProductVariantInput}`);
+
 
         // Generate a random ID, but only if one was not passed in
         const newVariantId = (inputVariant && inputVariant._id) || Random.id();
@@ -109,14 +123,16 @@ export default async function bulkInsertVariants(context, input) {
         }
     }
 
-    for (const newVariant of newVariantArray) {
-        ProductVariant.validate(newVariant);
-    }
+//     for (const newVariant of newVariantArray) {
+//         ProductVariant.validate(newVariant);
+//     }
     //Bulk Insert
-    await Products.insertMany(newVariant);
+    Logger.info(`22bulkInsertVariants@api-plugin-scaling-fortnight:  ${ JSON.stringify(newVariantArray) }`);
+
+    await Products.insertMany(newVariantArray);
 
 
-    Logger.debug(`createProductVariant: created variant: ${newVariantId} for ${productId}`);
+    Logger.info(`createProductVariant: created variant: ${ JSON.stringify(newVariantArray) } for ${productId}`);
     return newVariantArray;
 
 }

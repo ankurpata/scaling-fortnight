@@ -25,7 +25,7 @@ export default async function bulkInsertVariants(_, { input }, context) {
   const variants = await context.mutations.bulkInsertVariants(context, {
     productId: decodeProductOpaqueId(productId),
     shopId: decodeShopOpaqueId(shopId),
-    variant: variantInput
+    variants: variantInput
   });
 
   return {

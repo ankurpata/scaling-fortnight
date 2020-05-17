@@ -600,3 +600,31 @@ extend input ProductInput {
 
 }
 
+input VariantInputBulk {
+  "Variants input array"
+  variants: [ProductVariantInput]!
+
+  "Product Id"
+  productId: ID!
+
+  "The shop id"
+  shopId: ID!
+}
+
+"Response payload of `createProductVariant` mutation"
+type VariantInputBulkPayload  {
+  "The same string you sent with the mutation params, for matching mutation calls with their responses"
+  clientMutationId: String
+
+  "The created product variants"
+  variants: [ProductVariant]!
+}
+
+# this schema allows the following mutation:
+extend type Mutation {
+  "Create product variants in bulk"
+  bulkInsertVariants (
+    "Mutation input"
+    input: VariantInputBulk!
+  ): VariantInputBulkPayload
+}

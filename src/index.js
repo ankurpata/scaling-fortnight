@@ -2,6 +2,7 @@ import pkg from "../package.json";
 import schemas from "./schemas/index.js";
 import i18n from "./i18n/index.js";
 import mutations from "./mutations/index.js";
+import queries from "./queries/index.js";
 
 import resolvers from "./resolvers/index.js";
 
@@ -26,15 +27,21 @@ export default async function register(app) {
     await app.registerPlugin({
         label: "Plugin Example",
         name: "plugin-example",
+        collections: {
+            AttributesMapper: {
+                name: "AttributesMapper"
+            }
+        },
         version: pkg.version,
         functionsByType: {
             preStartup: [preStartup]
         },
         graphQL: {
             resolvers,
-            schemas
+            schemas,
         },
         mutations,
+        queries,
         i18n
     });
 }

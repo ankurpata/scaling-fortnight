@@ -1,0 +1,45 @@
+
+input GetAttributeGroupInput {
+    "Attribute Set Id"
+    attributeSetId: ID!
+
+    "The shop id"
+    shopId: ID!
+}
+
+"Response payload of `getAttributeGroups` mutation"
+type GetAttributeGroupPayload  {
+    "The same string you sent with the mutation params, for matching mutation calls with their responses"
+    clientMutationId: String
+
+    "The matching attribute groups"
+    attributeGroups: [AttributeGroups]!
+}
+
+type AttributeGroups {
+    "Attribute group label"
+    attributeGroupLabel: String
+
+    "Attribute Group id"
+    attributeGroupId: String
+
+    "Attributes"
+    attributes: [Attributes]
+}
+
+type Attributes {
+    "Id of attribute"
+    id: String
+
+    "Label of attribute"
+    label: String
+}
+
+# this schema allows the following mutation:
+extend type Query {
+    "Get attribute group mapper for given attribute set id"
+    getAttributeGroups (
+        "Mutation input"
+        input: GetAttributeGroupInput!
+    ): GetAttributeGroupPayload
+}

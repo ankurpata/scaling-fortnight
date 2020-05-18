@@ -39,7 +39,6 @@ export default async function getAttributeGroups(context, input) {
     const attributeGroupMap = await AttributesMapper.find({attribute_set_id: +attributeSetId}).toArray();
 
     //Get group key, value pair
-    // const groupKeys = Object.keys(tmpObj).map(x => +x);
     const groupKeys = _.map(attributeGroupMap, 'attribute_group_id');
     let attributeGroupNames = await AttributeGroup.find({
         attribute_group_id: {
@@ -55,7 +54,7 @@ export default async function getAttributeGroups(context, input) {
         attribute_id: {
             $in: attributeKeys
         }
-    }, {frontend_label: 1}).toArray();
+    }, {attribute_code: 1}).toArray();
 
     attributeKeyNames = _.mapKeys(attributeKeyNames, 'attribute_id');
 
@@ -65,7 +64,7 @@ export default async function getAttributeGroups(context, input) {
     attributeGroupMap.forEach(attributeMapRow => {
         let attributeId = attributeMapRow.attribute_id;
         let attributeGroupId = attributeMapRow.attribute_group_id;
-        let attributeObj = {id: attributeId, label: attributeKeyNames[attributeId].frontend_label};
+        let attributeObj = {id: attributeId, label: attributeKeyNames[attributeId].attribute_code};
         if (tmpObj[attributeGroupId]) {
             tmpObj[attributeGroupId].push(attributeObj);
         } else {

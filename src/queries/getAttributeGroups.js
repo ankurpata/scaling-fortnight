@@ -1,5 +1,6 @@
 import SimpleSchema from "simpl-schema";
 import Logger from "@reactioncommerce/logger";
+import _ from "lodash";
 // import * as Schemas from "./schemas";
 // import Reaction from "/imports/plugins/core/core/server/Reaction";
 
@@ -12,8 +13,6 @@ const inputSchema = new SimpleSchema({
     "attributeSetId": String,
     "shopId": String
 });
-
-
 
 
 /**
@@ -34,28 +33,56 @@ export default async function getAttributeGroups(context, input) {
 
     // inputSchema.validate(input);
     const {collections} = context;
-    const {AttributesMapper} = collections;
+    const {AttributesMapper, AttributeGroup, Attributes} = collections;
     const {attributeSetId, shopId} = input;
 
-    const attributeGroupMap = AttributesMapper.find({
-        attribute_set_id: attributeSetId,
-    }).toArray();
-    Logger.info(`getAttributeGroups:  ${JSON.stringify(attributeGroupMap)}`);
+    const attributeGroupMap = await AttributesMapper.find({attribute_set_id: +attributeSetId}).toArray();
 
-    let retArray = [];
-    let tmpObj = {};
-    // const attributeName = await Attributes.findOne({attribute_id: attributeMapRow.attribute_id}, {frontend_label: 1});
-    // const attributeGroupName = await Attributes.findOne({attribute_id : attributeMapRow.attribute_id}, {frontend_label: 1});
-
-    for (const attributeMapRow of attributeGroupMap) {
-        if (tmpObj[attributeMapRow.attribute_group_id]) {
-            tmpObj[attributeMapRow.attribute_group_id].push(attributeMapRow.attribute_id);
-        } else {
-            tmpObj[attributeMapRow.attribute_group_id] = [attributeMapRow.attribute_id];
+    //Get group key, value pair
+    // const groupKeys = Object.keys(tmpObj).map(x => +x);
+    const groupKeys = _.map(attributeGroupMap, 'attribute_group_id');
+    let attributeGroupNames = await AttributeGroup.find({
+        attribute_group_id: {
+            $in: groupKeys
         }
+    }, {attribute_group_name: 1}).toArray();
+
+    attributeGroupNames = _.mapKeys(attributeGroupNames, 'attribute_group_id');
+
+    //Get attribute key value pair
+    const attributeKeys = _.map(attributeGroupMap, 'attribute_id');
+    let attributeKeyNames = await Attributes.find({
+        attribute_id: {
+            $in: attributeKeys
+        }
+    }, {frontend_label: 1}).toArray();
+
+    attributeKeyNames = _.mapKeys(attributeKeyNames, 'attribute_id');
+
+    let attributeGroups = [];
+    let tmpObj = {};
+
+    attributeGroupMap.forEach(attributeMapRow => {
+        let attributeId = attributeMapRow.attribute_id;
+        let attributeGroupId = attributeMapRow.attribute_group_id;
+        let attributeObj = {id: attributeId, label: attributeKeyNames[attributeId].frontend_label};
+        if (tmpObj[attributeGroupId]) {
+            tmpObj[attributeGroupId].push(attributeObj);
+        } else {
+            tmpObj[attributeGroupId] = [attributeObj];
+        }
+    });
+
+    const tmpGroupIds = Object.keys(tmpObj);
+    for (const groupId of tmpGroupIds) {
+        attributeGroups.push({
+            attributeGroupLabel: attributeGroupNames[groupId].attribute_group_name,
+            attributeGroupId: groupId,
+            attributes: tmpObj[groupId]
+        });
     }
 
-    Logger.info(`createProductVariant: created variant: ${JSON.stringify(tmpObj)} for ${attributeGroupMap}`);
-    return newVariantArray;
+    //TODO: clientMutationId to be removed.
+    return {attributeGroups, clientMutationId: ""};
 
 }

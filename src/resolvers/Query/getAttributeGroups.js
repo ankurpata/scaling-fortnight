@@ -22,14 +22,10 @@ export default async function getAttributeGroups(_, {input}, context) {
 
     //TODO: encode/decode attributeSetId.
 
-    console.log(context.queries, 'context.queries.context.queries.')
-    const attributeGroups = await context.queries.getAttributeGroups(context, {
+    return await context.queries.getAttributeGroups(context, {
         attributeSetId: attributeSetId,
         shopId: decodeShopOpaqueId(shopId),
     });
 
-    return {
-        attributeGroups
-    };
 }
 

@@ -30,6 +30,12 @@ export default async function register(app) {
         collections: {
             AttributesMapper: {
                 name: "AttributesMapper"
+            },
+            AttributeGroup: {
+                name: "AttributeGroup"
+            },
+            Attributes : {
+                name: "Attributes"
             }
         },
         version: pkg.version,

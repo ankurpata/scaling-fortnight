@@ -1,0 +1,35 @@
+input ProductVariantSet {
+    "Parent Product"
+    product: ProductInput
+
+    "Child variants of the product"
+    variants: [ProductVariantInput]!
+}
+
+
+"CreateBulkProductInput"
+input CreateBulkProductInput {
+    "Variants input array"
+    data: [ProductVariantSet]!
+
+    "The shop id"
+    shopId: ID!
+}
+
+"Response payload of `createBulkProduct` mutation"
+type CreateBulkProductPayload  {
+    "The same string you sent with the mutation params, for matching mutation calls with their responses"
+    clientMutationId: String
+
+    "The created product variants"
+    status: Boolean!
+}
+
+# this schema allows the following mutation:
+extend type Mutation {
+    "Create products in bulk"
+    createBulkProduct (
+        "Mutation input"
+        input: CreateBulkProductInput!
+    ): CreateBulkProductPayload
+}

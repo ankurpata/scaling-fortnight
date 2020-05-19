@@ -36,6 +36,9 @@ export default async function register(app) {
             },
             Attributes : {
                 name: "Attributes"
+            },
+            AttributeSet :{
+                name: "AttributeSet"
             }
         },
         version: pkg.version,

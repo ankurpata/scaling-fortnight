@@ -33,9 +33,16 @@ export default async function getAttributeGroups(context, input) {
 
     // inputSchema.validate(input);
     const {collections} = context;
-    const {AttributesMapper, AttributeGroup, Attributes} = collections;
-    const {attributeSetId, shopId} = input;
+    const {AttributesMapper, AttributeGroup, Attributes, AttributeSet} = collections;
+    let {attributeSetId, shopId} = input;
 
+    //Check if a string has alphabets. If yes get setid first.
+    //TODO: To be changed later. Create a new field.
+    if (/^\d+$/.test(attributeSetId) == false) {
+        const attributeSet = await AttributeSet.findOne({attribute_set_name: attributeSetId.trim()});
+        console.log(attributeSet, 'attributeSet', attributeSet.attribute_set_id);
+        attributeSetId = attributeSet.attribute_set_id;
+    }
     const attributeGroupMap = await AttributesMapper.find({attribute_set_id: +attributeSetId}).toArray();
 
     //Get group key, value pair
@@ -64,7 +71,7 @@ export default async function getAttributeGroups(context, input) {
     attributeGroupMap.forEach(attributeMapRow => {
         let attributeId = attributeMapRow.attribute_id;
         let attributeGroupId = attributeMapRow.attribute_group_id;
-        let attributeObj = {id: attributeId, label: attributeKeyNames[attributeId].attribute_code};
+        let attributeObj = {id: attributeId, label: attributeKeyNames[attributeId]? attributeKeyNames[attributeId].attribute_code: ""};
         if (tmpObj[attributeGroupId]) {
             tmpObj[attributeGroupId].push(attributeObj);
         } else {

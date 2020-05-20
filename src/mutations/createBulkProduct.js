@@ -53,5 +53,5 @@ export default async function createBulkProduct(context, input) {
         return false;
     }
 
-    return true;
+    return results;
 }

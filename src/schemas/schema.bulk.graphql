@@ -22,7 +22,7 @@ type CreateBulkProductPayload  {
     clientMutationId: String
 
     "The created product variants"
-    status: Boolean!
+    status: [String]
 }
 
 # this schema allows the following mutation:

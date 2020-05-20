@@ -29,7 +29,7 @@ const inputSchema = new SimpleSchema({
  * @return {Promise<Object>} updateProduct payload
  */
 export default async function bulkInsertVariants(context, input) {
-    console.log('@bulkInsertVariants@api-plugin-scaling-fortnight', input);
+//     console.log('@bulkInsertVariants@api-plugin-scaling-fortnight', input);
 
     Logger.info(`bulkInsertVariants@api-plugin-scaling-fortnight:  ${ JSON.stringify(input) }`);
 
@@ -77,10 +77,10 @@ export default async function bulkInsertVariants(context, input) {
         const initialProductVariantData = await cleanProductVariantInput(context, {
             inputVariant
         });
-        Logger.info(`@1insideLoop:  ${ JSON.stringify(inputVariant) }`);
+//         Logger.info(`@1insideLoop:  ${ JSON.stringify(inputVariant) }`);
 
-        Logger.info(`@2insideLoop:  ${ JSON.stringify(initialProductVariantData) }`);
-        Logger.info(`@3insideLoop:  ${ JSON.stringify(cleanProductVariantInput) } : ${cleanProductVariantInput}`);
+//         Logger.info(`@2insideLoop:  ${ JSON.stringify(initialProductVariantData) }`);
+//         Logger.info(`@3insideLoop:  ${ JSON.stringify(cleanProductVariantInput) } : ${cleanProductVariantInput}`);
 
 
         // Generate a random ID, but only if one was not passed in
@@ -104,11 +104,6 @@ export default async function bulkInsertVariants(context, input) {
 
         newVariantArray.push(newVariant);
     }
-    //
-    // if (initialProductVariantData.isDeleted) {
-    //     throw new ReactionError("invalid-param", "Creating a deleted product variant is not allowed");
-    // }
-
 
     const isOption = ancestors.length > 1;
 
@@ -123,16 +118,14 @@ export default async function bulkInsertVariants(context, input) {
         }
     }
 
-//     for (const newVariant of newVariantArray) {
-//         ProductVariant.validate(newVariant);
-//     }
+
     //Bulk Insert
-    Logger.info(`22bulkInsertVariants@api-plugin-scaling-fortnight:  ${ JSON.stringify(newVariantArray) }`);
+//     Logger.info(`22bulkInsertVariants@api-plugin-scaling-fortnight:  ${ JSON.stringify(newVariantArray) }`);
 
     await Products.insertMany(newVariantArray);
 
 
-    Logger.info(`createProductVariant: created variant: ${ JSON.stringify(newVariantArray) } for ${productId}`);
+//     Logger.info(`createProductVariant: created variant: ${ JSON.stringify(newVariantArray) } for ${productId}`);
     return newVariantArray;
 
 }

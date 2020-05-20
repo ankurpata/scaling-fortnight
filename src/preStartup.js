@@ -16,6 +16,13 @@ export default async function preStartup(context) {
         attributeSetCode: {
             type: String,
             optional: true
+        },
+        tagIds: {
+            type: Array,
+            optional: true
+        },
+        "tagIds.$": {
+            type: String
         }
     });
 }

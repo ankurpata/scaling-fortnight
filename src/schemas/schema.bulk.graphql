@@ -38,8 +38,8 @@ input ProductBySkuDetails{
     "Prices to update"
     price: String
 
-    "Upload price"
-    upload_price: String
+    "special  price"
+    special_price: String
 
     "ranking"
     ranking: String

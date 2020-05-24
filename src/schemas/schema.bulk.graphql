@@ -25,11 +25,48 @@ type CreateBulkProductPayload  {
     status: [String]
 }
 
-# this schema allows the following mutation:
+"UpdateProductBySkuPayload"
+type UpdateProductBySkuPayload {
+    id:  [String]
+}
+
+"Product by sku object details"
+input ProductBySkuDetails{
+    "SKU"
+    sku: String
+
+    "Prices to update"
+    price: String
+
+    "Upload price"
+    upload_price: String
+
+    "ranking"
+    ranking: String
+}
+
+"UpdateProductBySku"
+input UpdateProductBySkuInput {
+    "Input data"
+    data: [ProductBySkuDetails]!
+
+    "ID of shop that owns the variant to update"
+    shopId: ID!
+}
+
+
+# createBulkProduct schema allows the following mutation:
 extend type Mutation {
     "Create products in bulk"
     createBulkProduct (
         "Mutation input"
         input: CreateBulkProductInput!
     ): CreateBulkProductPayload
+
+    "Create products in bulk"
+    updateProductBySku (
+        "Mutation input"
+        input: UpdateProductBySkuInput!
+    ): UpdateProductBySkuPayload
 }
+

@@ -1,7 +1,7 @@
 {
-  "name": "api-plugin-example",
+  "name": "api-plugin-example3",
   "description": "Boilerplate Example plugin for the Reaction API",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "engines": {
@@ -14,11 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/reactioncommerce/api-plugin-example.git"
   },
-  "author": {
-    "name": "Reaction Commerce",
-    "email": "engineering@reactioncommerce.com",
-    "url": "https://reactioncommerce.com"
-  },
+  "author": "Reaction Commerce <engineering@reactioncommerce.com> (https://reactioncommerce.com)",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/reactioncommerce/api-plugin-example/issues"
@@ -55,8 +51,7 @@
     "eslint-plugin-react-hooks": "^2.0.1",
     "husky": "^4.2.3",
     "jest": "^25.1.0",
-    "semantic-release": "^17.0.4",
-    "cheerio": "^1.0.0-rc.3"
+    "semantic-release": "^17.0.4"
   },
   "scripts": {
     "lint": "npm run lint:eslint",
@@ -85,5 +80,10 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "keywords": [
+    "reaction",
+    "plugin",
+    "api"
+  ]
 }
